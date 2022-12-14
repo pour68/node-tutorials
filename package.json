@@ -1,0 +1,19 @@
+{
+  "name": "tutorials",
+  "version": "1.0.0",
+  "description": "Node tutorials",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "author": "Pouria Nayeb",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "date-fns": "^2.29.3",
+    "uuid": "^9.0.0"
+  }
+}

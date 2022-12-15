@@ -4,8 +4,16 @@
 
 founder: Ryan Dahl
 birthdate: July 2011
-story: an engineer name Ryan Dahl developed node.js by the help of c++ and chrome v8-engine.
-goal: run javascript codes on computer.
+story: An engineer name Ryan Dahl developed node.js by the help of c++ and chrome v8-engine.
+goal: Run javascript codes on computer.
+
+## JavaScript engines
+
+- Firefox (gecko)
+- Chrome (v8)
+- Edge (v8)
+- Internet Explorer (chakra)
+- Safari (webkit)
 
 ## What is Node.js?
 
@@ -20,11 +28,9 @@ single thread/non-blocking asynchronous architecture, which is very memory effic
 - javascript everywhere
 - cleaner and more consistent codebase
 - large ecosystem of packages/modules
+- it's not a language, library and framework
 
-Note:
-
-node is not suitable for cpu intensive apps.
-[v8 engine official website](https://v8.dev/)
+Note: [v8 engine official website](https://v8.dev/)
 
 ## What node.js can do?
 
@@ -32,6 +38,9 @@ node is not suitable for cpu intensive apps.
 - Node.js can create, open, read, write, delete, and close files on the server
 - Node.js can collect form data
 - Node.js can add, delete, modify data in your database
+- Node.js can build backend/real-time apps/streaming services/cli tools/multiplayer games/...
+
+Note: node is not suitable for cpu intensive apps like video encoding.
 
 ## Setting up your development environment
 
@@ -41,6 +50,10 @@ node is not suitable for cpu intensive apps.
 Note:
 
 download Node.js from [here](https://nodejs.org)
+
+## How to check node.js is sucessfully installed
+
+- node --version || node -v
 
 ## Differences between vanilla js and node.js
 
@@ -55,14 +68,25 @@ download Node.js from [here](https://nodejs.org)
 
 project root > terminal (ctrl + `) > node [filename].js
 
-## Node build-in modules/packages
+## Exercises
 
+- find and favorite my github for node.js
+
+## Node wrapper function
+
+```(function(exports, require, module,__filename,__dirname) {  })```
+
+Note:
+
+generate some error in order to see node wrapper. (example: const fullname = ;)
 __dirname: return absolute path
 __filename: return absolute path + current file + file extension
 
-## Node wrapper
+## Node module scope
 
-```(function(exports, require, module,__filename,__dirname) {  })```
+- Every file in a Node application is a module. Node automatically wraps the code in each file with an IIFE (Immediately-invoked Function Expression) to create scope. So, every variables and functions are encapsulated inside a js file and never attached to global object.
+
+## Node build-in modules/packages
 
 ### OS module
 
@@ -152,7 +176,7 @@ const fileOps = async () => {
     } catch (err) { ... }
 }
 
-## url module/package
+## Url module/package
 
 The URL module splits up a web address into readable parts.
 
@@ -180,14 +204,24 @@ parsedUrl.search (example: ?year=2017&month=february)
 const querydata = parsedUrl.query; (example: { year: 2017, month: 'february' })
 querydata.month (example: february)
 
-### process module (no need to import)
+### Process module (no need to import)
 
 const port = process.env.PORT || 3500;
 
 process.on("oncaughException", (err) => {
     // manage error
     process.exit(1);
-})
+});
+
+## Event
+
+const EventEmitter = require("events");
+const eventEmitter = new EventEmitter();
+
+eventEmitter.on("event name", (param) => { ... });
+eventEmitter.emit("event name", arg);
+
+Note: Every class can extends EventEmitter class.
 
 ## HTTP module
 

@@ -84,7 +84,7 @@ __filename: return absolute path + current file + file extension
 
 ## Node module scope
 
-- Every file in a Node application is a module. Node automatically wraps the code in each file with an IIFE (Immediately-invoked Function Expression) to create scope. So, every variables and functions are encapsulated inside a js file and never attached to global object.
+Every file in a Node application is a module. Node automatically wraps the code in each file with an IIFE (Immediately-invoked Function Expression) to create scope. So, every variables and functions are encapsulated inside a js file and never attached to global object.
 
 ## Node build-in modules/packages
 
@@ -92,25 +92,25 @@ __filename: return absolute path + current file + file extension
 
 const os = require("os");
 
-platform(): return os platform. (example: win32)
-arch(): return os architecture. (example: x64)
-cpus: return cpu core info. (example: object)
-type(): return the type of the os. (example: Windows_NT)
-version(): return the version of os. (example: Widnwos 10 Pro)
-homedir(): return os home directory. (example: C:\Users\PouriaNayeb)
-totalmem(): return total memory
-freemem(): return free memory
-uptime(): return number of seconds your computer is up and running.
+- platform(): return os platform. (example: win32)
+- arch(): return os architecture. (example: x64)
+- cpus: return cpu core info. (example: object)
+- type(): return the type of the os. (example: Windows_NT)
+- version(): return the version of os. (example: Widnwos 10 Pro)
+- homedir(): return os home directory. (example: C:\Users\PouriaNayeb)
+- totalmem(): return total memory
+- freemem(): return free memory
+- uptime(): return number of seconds your computer is up and running.
 
 ### PATH module
 
 const path = require("path");
 
-dirname(__filename): return absolute path
-basename(__filename): return filename with extension
-extname(__filename): return extension of the file
-parse(__filename): return an object with props like: root - dir - base - ext and name
-join(__dirname, folderName, fileNameWithExt)
+- dirname(__filename): return absolute path
+- basename(__filename): return filename with extension
+- extname(__filename): return extension of the file
+- parse(__filename): return an object with props like: root - dir - base - ext and name
+- join(__dirname, folderName, fileNameWithExt)
 
 ### FS module
 
@@ -119,33 +119,34 @@ const fs = require("fs");
 #### File management
 
 pattern:
-readFile(relativePath, callback): read file but return buffer data
-readFile(relativePath, charset, callback): read file and return data
+
+- readFile(relativePath, callback): read file but return buffer data
+- readFile(relativePath, charset, callback): read file and return data
 example: readFile("./files/log.txt", "utf8", (err, data) => { ... });
 
-writeFile(relativePath, content, callback): write content in file, utf8 is by default
+- writeFile(relativePath, content, callback): write content in file, utf8 is by default
 example: writeFile(path.join(__dirname, "files", "log.txt"), "write some content", err => {});
 
-appendFile(relativePath, content, callback): append content to file(after write content can use it in callback)
+- appendFile(relativePath, content, callback): append content to file(after write content can use it in callback)
 
-open(relativePath, flag, callback): create empty file with specified name
+- open(relativePath, flag, callback): create empty file with specified name
 example: open("log.txt", "w", (err, file) => {});
 
-rename(startPath, endPath, callback): rename filename
+- rename(startPath, endPath, callback): rename filename
 example: rename("log1.txt", "log2.txt", (err) => {});
 
-unlink(relativePath): delete file
+- unlink(relativePath): delete file
 example: unlink("log.txt", (err) => {});
 
-readdir(relativePath, callback)
-readdirSync(relativePath): read all files
+- readdir(relativePath, callback)
+- readdirSync(relativePath): read all files
 
 examples:
 readdir("./", (err, files) => {})
 readdirSync("./");
 
-createReadStream(relativePath, config): chunk large files
-createWriteStream(relativePath): write chunk large files
+- createReadStream(relativePath, config): chunk large files
+- createWriteStream(relativePath): write chunk large files
 
 example:
 const rs = fs.createReadStream(relativePath, { encoding: "utf8" });
@@ -155,12 +156,12 @@ rs.on("data", (chunkData) => { ws.write(chunkData); }) || rs.pipe(ws)
 
 #### Folder management
 
-existsSync(raltivePath)
+- existsSync(raltivePath)
 
-mkdir(raltivePath, callback)
+- mkdir(raltivePath, callback)
 example: mkdir("./new", err => {})
 
-rmdir(raltivePath, callback)
+- rmdir(raltivePath, callback)
 example: rmdir("./new", err => {})
 
 ## FS promise module
@@ -182,27 +183,28 @@ The URL module splits up a web address into readable parts.
 
 const myUrl = new URL("absolute address");
 
-myUrl.href: absolute url (example: https://example.com:8080/search?query=js-tuts#home)
-myUrl.toString(): absolute url (example: https://example.com:8080/search?query=js-tuts#home)
-myUrl.pathname: return url path (example: /search)
-myUrl.host: return host name (example: example.com:8080)
-myUrl.hostname: return host name (example: example.com)
-myUrl.origin: return referer origin
-myUrl.search: return all things after ? sign (example: ?query=js-tuts)
-myUrl.searchParams: return query strings (example: URLSearchParams { 'query' => 'js-tuts' }
-myUrl.hash.substring(1): return fragment (example: home)
+- myUrl.href: absolute url (example: https://example.com:8080/search?query=js-tuts#home)
+- myUrl.toString(): absolute url (example: https://example.com:8080/search?query=js-tuts#home)
+- myUrl.pathname: return url path (example: /search)
+- myUrl.host: return host name (example: example.com:8080)
+- myUrl.hostname: return host name (example: example.com)
+- myUrl.origin: return referer origin
+- myUrl.search: return all things after ? sign (example: ?query=js-tuts)
+- myUrl.searchParams: return query strings (example: URLSearchParams { 'query' => 'js-tuts' }
+- myUrl.hash.substring(1): return fragment (example: home)
 
-myUrl.searchParams.append("key", "value");
-myUrl.searchParams.forEach((value, key) => {});
+- myUrl.searchParams.append("key", "value");
+- myUrl.searchParams.forEach((value, key) => {});
 
 or
 
 let parsedUrl = url.parse("http://localhost:8080/default.htm?year=2017&month=february", true);
-parsedUrl.host (example: localhost:8080)
-parsedUrl.pathname (example: /default)
-parsedUrl.search (example: ?year=2017&month=february)
-const querydata = parsedUrl.query; (example: { year: 2017, month: 'february' })
-querydata.month (example: february)
+
+- parsedUrl.host (example: localhost:8080)
+- parsedUrl.pathname (example: /default)
+- parsedUrl.search (example: ?year=2017&month=february)
+- const querydata = parsedUrl.query; (example: { year: 2017, month: 'february' })
+- querydata.month (example: february)
 
 ### Process module (no need to import)
 

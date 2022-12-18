@@ -5,19 +5,19 @@
 founder: Ryan Dahl
 birthdate: July 2011
 story: An engineer name Ryan Dahl developed node.js by the help of c++ and chrome v8-engine.
-goal: Run javascript codes on computer.
+goal: Run javascript codes out of browser or on computer.
 
 ## JavaScript engines
 
-- Firefox (gecko)
-- Chrome (v8)
-- Edge (v8)
-- Internet Explorer (chakra)
-- Safari (webkit)
+- Firefox (SpiderMonkey)
+- Chrome (V8)
+- Edge (V8)
+- Internet Explorer (Chakra)
+- Safari (JavaScriptCore)
 
 ## What is Node.js?
 
-open source, free, cross platform, javascript runtime/server environment.
+free, open source, cross platform, javascript runtime/server environment.
 single thread/non-blocking asynchronous architecture, which is very memory efficient.
 
 - open source: visit/modify code by community.
@@ -86,7 +86,30 @@ __filename: return absolute path + current file + file extension
 
 Every file in a Node application is a module. Node automatically wraps the code in each file with an IIFE (Immediately-invoked Function Expression) to create scope. So, every variables and functions are encapsulated inside a js file and never attached to global object.
 
+## exports vs module.exports
+
+example:
+
+math.js > add/multiple function > exports.add/exports.multiple/... || module.exports = {add, multiple,...}
+but when you use exports = {add, multiple,...} nothing gonna return
+
+Note:
+
+always use module.exports.
+
+### Custom module
+
+- create a file
+- create your own methods/props
+- use module.exports and export them all
+- in target file import them by commonjs method or in simple term require("relative address");
+- use methods/props
+
+Note: node 14 and above support ECMAScript module system format as well.
+
 ## Node build-in modules/packages
+
+[Node.js DOCS](https://nodejs.org/en/docs/)
 
 ### OS module
 
@@ -242,14 +265,6 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(port, callback);
-
-### Custom module
-
-- create a file
-- create your own methods/props
-- use module.exports and export them all
-- in target file import them by commonjs method
-- use methods/props
 
 ## NPM(node package manager)
 

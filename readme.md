@@ -107,6 +107,13 @@ always use module.exports.
 
 Note: node 14 and above support ECMAScript module system format as well.
 
+## Importing JSON and watch mode
+
+- create json file
+- import it to js file
+
+node --watch filename
+
 ## Node build-in modules/packages
 
 [Node.js DOCS](https://nodejs.org/en/docs/)
@@ -283,19 +290,28 @@ Collection of npm commands to manage modules/packages
 - npm init: create initial file to manage modules/packages
 - npm init -y: create initial file with default data to manage modules/packages
 
-#### Change values of npm file properties
+Note:
 
-- name
+What is package.json?
+
+#### node.js module scanner priorities
+
+- core module
+- file and folder
+- node_modules
 
 #### Install module/package
 
 - npm install [package name]: install package with specified name
 - npm i [package name]: install package with specified name
-- npm i [package name] -D: install package with specified name just for development environment
+- npm i [package name] -D || --save-dev: install package with specified name just for development environment
 
 npm i nodemon -D: start/run node file
 npm i date-fns: format date/time
 npm i uuid: generate unique id
+npm i undersccore: a collection of helper/utils functions
+npm i mongoose: is ODM/ORM package for mangodb
+npm i -g npm@5.5.3: install specific version of a package globally
 
 example:
 const {format} = require("date-fns");
@@ -304,28 +320,65 @@ const {v4:uuid} = require("uuid");
 const currentDate = new Date(new Date, yyyyMMdd\tHH:mm:ss);
 const id = uuid();
 
+Note:
+
+- Imagine v1 of a library installed on node_modules and after there is a library that consumes v2 of that library, in this situations v2 of that specific package stored locally on the library consume it.
+- Always exclude node_modules from source control.
+
+#### Semantic versioning
+
+package version pattern: major.minor.patch
+
+- ^(caret): major never change.
+- ~(Tilde): major and minor never change.
+- no-sign: exact version.
+
+#### module/package list
+
+- npm list
+- npm list --depth=0: main moudle/packages.
+
+#### metadata(registry info) about module/package
+
+- npm view mongoose
+- npm view mongoose dependencies
+- npm view mongoose versions
+
+#### downgrade/upgrade packages
+
+npm i mongoose@version
+npm i underscore@version
+
+#### updating local modules/packages
+
+- npm outdated: watch outdated packages
+- npm outdated -g: watch globally installed outdated packages
+- npm update: update minor.patch version of packages
+- npm i -g npm-check-updates > terminal + npm-check-updates > ncu -u > npm i: update all packages to latest version
+
 #### Uninstall module/package
 
-- npm uninstall [package name]: uninstall package with specified name
-- npm un [package name]: uninstall package with specified name
-- npm rm [package name]: uninstall package with specified name
+- npm uninstall/un/rm [package name]: uninstall package with specified name
+- npm uninstall/un/rm -g [package name]: uninstall globally installed package with specified name
 
-#### Update module/package
+#### publishing a module/package
 
-npm update: update all installed packages by the rules in package.json
+- create a folder with unique name
+- create package.json
+- create a file and export function
+- npm adduser: create an account
+- npm login: already have an account? login
+- npm publish
+
+Exercise:
+
+create a project and consume created package.
+
+#### updating published module/package
+
+- npm version major/minor/patch
+- npm publish
 
 ## Handling and logging errors
 
 implement by loggerEvent file
-
-## Unit and Integration testing
-
-## Test-Driven development
-
-## Clean code and refactoring
-
-## Security best practices
-
-## Useful libraries
-
-## Deployment

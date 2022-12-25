@@ -120,7 +120,7 @@ node --watch filename
 
 ### OS module
 
-const os = require("os");
+const os = require("node:os") || require("os");
 
 - platform(): return os platform. (example: win32)
 - arch(): return os architecture. (example: x64)
@@ -134,13 +134,42 @@ const os = require("os");
 
 ### PATH module
 
-const path = require("path");
+const path = require("node:path") || require("path");
 
 - dirname(__filename): return absolute path
-- basename(__filename): return filename with extension
+- basename(__filename||__dirname): return filename with extension/folder name
 - extname(__filename): return extension of the file
 - parse(__filename): return an object with props like: root - dir - base - ext and name
+- format(path.parse(__filename)): return absolute path
+- isAbsolute(__filename): check if address is absolute
 - join(__dirname, folderName, fileNameWithExt)
+- resolve(__dirname, folderName, fileNameWithExt)
+
+### Character set and encoding
+
+#### binary data
+
+computers store and represent data in binary format which is collection of 0s and 1s
+each 0/1 is called binary digit/bit
+to work with piece of data computer needs to convert that to binary format
+
+character in binary format:
+computers will first convert character to a number and then convert the number to binary format
+example: 86 is numberic representation of "V" character that is also called charcter code
+
+#### Character sets
+
+are pre-defined lists of characters represented by numbers
+Unicode and ASCII
+
+#### Character encoding
+
+dictiates how to represent a number in a character set in binary data before it can be stored in a computer
+it dictiates how many bits to use to represent the number
+example:
+UTF-8 represent that characters should be encoded in bytes (8 bits)
+4 => 100 => 00000100
+V => 86 => 01010110
 
 ### FS module
 

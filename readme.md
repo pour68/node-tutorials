@@ -72,6 +72,10 @@ project root > terminal (ctrl + `) > node [filename].js
 
 - find and favorite my github for node.js
 
+## Node.js
+
+binary > c > c++ > js
+
 ## Node wrapper function
 
 ```(function(exports, require, module,__filename,__dirname) {  })```
@@ -171,6 +175,39 @@ UTF-8 represent that characters should be encoded in bytes (8 bits)
 4 => 100 => 00000100
 V => 86 => 01010110
 
+#### Stream
+
+a sequence of data that is being moved from one point to another over time
+a stream of data over the internet being moved from one computer to another
+stream of data transfered from one file to another within the same computer
+process streams of data in chunks as they arrive instead of waiting for the entire data to be available before processing
+
+example:
+youtube videos.
+transfering data from fileA to fileB.
+
+advantage: prevent unnecessary data downloads and memory usage.
+
+#### Buffer
+
+a small capacity for processing streaming data at runtime before transfer.
+
+example:
+
+30 seating capacity
+
+scenario 1: 100 people arrival > 30 people accummodated > 70 in queue (wating)
+scenario 2: 1 person > at least for 10 people (wating)
+
+example:
+
+const buffer = new Buffer.from("Pouria");
+
+- buffer.write("DevMedia.ir"); // output: DevMed (buffer have limited capacity)
+- buffer.toString(); // output: Pouria
+- buffer; // output: ```<Buffer collectionOfHexadecimalNo. >``` (hold data in binary format but represent in hexadecimal format)
+- buffer.toJSON(); // output: { type: "Buffer", data: arrayOfDecimalNo. }
+
 ### FS module
 
 const fs = require("fs");
@@ -179,38 +216,46 @@ const fs = require("fs");
 
 pattern:
 
-- readFile(relativePath, callback): read file but return buffer data
-- readFile(relativePath, charset, callback): read file and return data
-example: readFile("./files/log.txt", "utf8", (err, data) => { ... });
+- readFileAsync(path)
+- readFileAsync(path, charset)
+example: const fileContent = readFileSync("./files/log.txt", "utf-8");
 
-- writeFile(relativePath, content, callback): write content in file, utf8 is by default
+- readFile(path, callback): read file but return buffer data
+- readFile(path, charset, callback): read file and return data
+- readFile(path, charset, callback): read file and return data
+example: readFile("./files/log.txt", "utf-8", (err, data) => { ... });
+
+- writeFileSync(path, content)
+example: writeFileSync(path.join(__dirname, "files", "log.txt"), "write some content")
+
+- writeFile(path, content, callback): write content in file, utf8 is by default
+- writeFile(path, content, options, callback): write content in file, utf8 is by default
 example: writeFile(path.join(__dirname, "files", "log.txt"), "write some content", err => {});
+example: writeFile(path.join(__dirname, "files", "log.txt"), "write some content", { flag: "a" }, err => {});
 
-- appendFile(relativePath, content, callback): append content to file(after write content can use it in callback)
+- appendFile(path, content, callback): append content to file(after write content can use it in callback)
 
-- open(relativePath, flag, callback): create empty file with specified name
+- open(path, flag, callback): create empty file with specified name
 example: open("log.txt", "w", (err, file) => {});
 
 - rename(startPath, endPath, callback): rename filename
 example: rename("log1.txt", "log2.txt", (err) => {});
 
-- unlink(relativePath): delete file
+- unlink(path): delete file
 example: unlink("log.txt", (err) => {});
 
-- readdir(relativePath, callback)
-- readdirSync(relativePath): read all files
+- readdirSync(path): read all files in a folder
+example: readdirSync("./");
 
-examples:
-readdir("./", (err, files) => {})
-readdirSync("./");
+- readdir(path, callback): read all files in a folder
+example: readdir("./", (err, files) => {})
 
-- createReadStream(relativePath, config): chunk large files
-- createWriteStream(relativePath): write chunk large files
+- createReadStream(path, config): chunk large files
+- createWriteStream(path): write chunk large files
 
 example:
-const rs = fs.createReadStream(relativePath, { encoding: "utf8" });
-const ws = fs.createWriteStream(relativePath);
-
+const rs = fs.createReadStream(path, { encoding: "utf8" });
+const ws = fs.createWriteStream(path);
 rs.on("data", (chunkData) => { ws.write(chunkData); }) || rs.pipe(ws)
 
 #### Folder management

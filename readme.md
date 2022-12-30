@@ -111,6 +111,13 @@ always use module.exports.
 
 Note: node 14 and above support ECMAScript module system format as well.
 
+## Double starndard of import/export in js
+
+- use commonjs syntax by default
+
+- package.json > "type": "module"
+- use ES7 syntax
+
 ## Importing JSON and watch mode
 
 - create json file

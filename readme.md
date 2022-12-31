@@ -191,9 +191,15 @@ process streams of data in chunks as they arrive instead of waiting for the enti
 
 example:
 youtube videos.
-transfering data from fileA to fileB.
+transfering data from fileA to fileB in a same computer.
 
+types: reable stream (reading file) - writable stream (writing file) - duplex/hybrid stream (sockets) - transform stream (compress/decompress data)
 advantage: prevent unnecessary data downloads and memory usage.
+
+##### Stream and node
+
+stream in fact is a build-in module inherits from EvenEmitter class.
+other modules use streams for their functioning.
 
 #### Buffer
 
@@ -217,7 +223,7 @@ const buffer = new Buffer.from("Pouria");
 
 ### FS module
 
-const fs = require("fs");
+const fs = require(node:fs) || require("fs");
 
 #### File management
 
@@ -261,9 +267,21 @@ example: readdir("./", (err, files) => {})
 - createWriteStream(path): write chunk large files
 
 example:
-const rs = fs.createReadStream(path, { encoding: "utf8" });
+const rs = fs.createReadStream(path, { encoding: "utf-8", highWaterMark: 2 });
 const ws = fs.createWriteStream(path);
 rs.on("data", (chunkData) => { ws.write(chunkData); }) || rs.pipe(ws)
+
+Note: highWaterMark specified the bytes of chunks. (default: 18Bytes/64KB)
+
+#### zlib module
+
+const zlib = require("node:zlib") || require(zlib);
+
+const gzip = zlib.createGzip();
+const rs = createReadStream(path, config);
+const ws = fs.writeStream(path); // file.txt.gz
+
+rs.pipe(gzip).pipe(ws);
 
 #### Folder management
 
@@ -277,7 +295,7 @@ example: rmdir("./new", err => {})
 
 ## FS promise module
 
-const fsPromises = require("fs").promises;
+const fsPromises = require(node:fs/promises) || require("fs").promises
 
 const fileOps = async () => {
     try {

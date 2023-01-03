@@ -44,7 +44,7 @@ Note: node is not suitable for cpu intensive apps like video encoding.
 
 ## Setting up your development environment
 
-- install node.js
+- install node.js (LTS(Long Term Support) - Current)
 - editor: vscode - atom - sublime - bracket - vim - ...
 
 Note:
@@ -365,12 +365,20 @@ const server = http.createServer((req, res) => {
     req.params
     req.query
 
+    res.statusCode = statusCode;
+    res.setHeader(key, value);
     res.writeHead(statusCode, options);
     res.write();
     res.end();
 });
 
 server.listen(port, callback);
+server.listen(port, hostname, callback);
+example: server.listen(3500, "127.0.0.1", () => { console.log("server is up and running..."); });
+
+Exercise:
+
+Send PlainText/JSON/HTML data as a response.
 
 ## NPM(node package manager)
 
